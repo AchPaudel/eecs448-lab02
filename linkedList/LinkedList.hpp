@@ -41,16 +41,16 @@ bool LinkedList<T>::search(T value) const
 	if (isEmpty()){
 		return(isFound);
 	}
-	if (temp != nullptr){
+	
 	while(temp->getNext() != nullptr){
 		if (temp->getValue() == value){
 			isFound = true;
+			return(isFound);
 		}
 		else{
 			temp = temp->getNext();
 		}
 	}
-}
 
 	return(isFound);
 }
