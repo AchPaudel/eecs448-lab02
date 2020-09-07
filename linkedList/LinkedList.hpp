@@ -38,15 +38,19 @@ bool LinkedList<T>::search(T value) const
 	Node<T>* temp = m_front;
 	bool isFound = false;
 
-	if (isEmpty() == true)
-		return isFound;
-
-	while(temp->getNext() != nullptr){
-		if (temp->getValue() == value)
-			isFound = true;
-		else
-			temp = temp->getNext();
+	if (isEmpty()){
+		return(isFound);
 	}
+	if (temp != nullptr){
+	while(temp->getNext() != nullptr){
+		if (temp->getValue() == value){
+			isFound = true;
+		}
+		else{
+			temp = temp->getNext();
+		}
+	}
+}
 
 	return(isFound);
 }
@@ -56,7 +60,6 @@ std::vector<T> LinkedList<T>::toVector() const
 {
 	std::vector<T> vec;
 	Node<T>* temp = m_front;
-
 	while( temp != nullptr )
 	{
 		vec.push_back(temp->getValue());
@@ -106,26 +109,26 @@ bool LinkedList<T>::removeBack()
 	Node<T>* secondintoLast = nullptr;
 	bool isRemoved = false;
 
-	secondintoLast = m_front;
-
-	if (isEmpty())
+	if (isEmpty()){
 		return isRemoved;
-	else if (m_size == 1)
-		removeFront();
+	}
+	else if (m_size == 1){
+		lastNode = m_front;
+	}
 	else
 		{
+			secondintoLast = m_front;
 			while (secondintoLast->getNext()->getNext() != nullptr){
 				secondintoLast = secondintoLast->getNext();
 			}
 
 			lastNode = secondintoLast->getNext();
-			lastNode->setNext(nullptr);
-			delete lastNode;
-			lastNode = nullptr;
-			secondintoLast -> setNext(nullptr);
-			m_size--;
-			isRemoved = true;
 		}
+		delete lastNode;
+		lastNode = nullptr;
+		secondintoLast -> setNext(nullptr);
+		m_size--;
+		isRemoved = true;
 
 	return(isRemoved);
 }
